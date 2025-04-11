@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Citas Inspiradoras</title>
+        <style>
+    body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  margin: 0;
+  }
+
+    .container {
+  text-align: center;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .quote {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  font-style: italic;
+  color: #333;
+  }
+
+   .author {
+  font-size: 1.2em;
+  color: #555;
+  margin-top: 10px;
+  }
+
+   button {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+   }
+
+  button:hover {
+  background-color: #0056b3;
+  }
+    </style>
+
+</head>
+<body>
+    <div class="container">
+      <div id="quote" class="quote"></div>
+      <div id="author" class="author"></div>
+      <button onclick="showRandomQuote()">Mostrar otra cita</button>
+  <script>
+    // Array de citas
+    const quotes = [
+      { text: "Sé el cambio que quieres ver en el mundo.", author: "Mahatma Gandhi" },
+      { text: "El único modo de hacer un gran trabajo es amar lo que haces.", author: "Steve Jobs" },
+      { text: "El dinero no es la clave del éxito; la libertad para poder crear lo es.", author: "Nelson Mandela" },
+      { text: "La felicidad no es algo hecho. Viene de tus propias acciones.", author: "Dalai Lama" },
+      { text: "Lo único imposible es aquello que no intentas.", author: "Anónimo" },
+      { text: "Ellos son buenos, pero yo por algo estoy aquí", author: "Baxi" },
+      { text: "El mayor aprendizaje lo obtienes de los demas ", author: "Luis Morales" }
+    ];
+    
+    // Función para mostrar una cita aleatoria
+    function showRandomQuote() {
+      const randomIndex = Math.floor(Math.random() * quotes.length);
+      const randomQuote = quotes[randomIndex];
+    
+      // Mostrar cita en la página
+      document.getElementById("quote").innerText = `"${randomQuote.text}"`;
+      document.getElementById("author").innerText = `— ${randomQuote.author}`;
+    
+      // Guardar la cita en el almacenamiento local
+      localStorage.setItem("lastQuote", JSON.stringify(randomQuote));
+    }
+    
+    // Verificar si hay una cita guardada en el almacenamiento local
+      function loadLastQuote() {
+        const lastQuote = localStorage.getItem("lastQuote");
+         if (lastQuote) {
+         const parsedQuote = JSON.parse(lastQuote);
+         document.getElementById("quote").innerText = `${parsedQuote.text}`;
+        document.getElementById("author").innerText = `${parsedQuote.author}`;
+     } else {
+          showRandomQuote();
+  }
+}
+
+//cargar la cita cuando se carga la pagina 
+      window.onload = loadLastQuote;
+</script>
+
+</body>
+</html>
